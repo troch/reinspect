@@ -1,6 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { StateInspector, useState } from "./reinspect"
+import { StateInspector, useState } from "reinspect"
 import { Counter } from "./Counter";
 
 function App() {

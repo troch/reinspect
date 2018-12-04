@@ -1,5 +1,5 @@
 import React from "react"
-import { useState } from "./reinspect"
+import { useState } from "reinspect"
 
 export function Counter({ id }) {
     const [count, setCount] = useState(
