@@ -1,5 +1,5 @@
 import React from "react"
-import { useState, useReducer } from "./react-hooked-state"
+import { useState, useReducer } from "./reinspect"
 
 export function CounterWithUseState({ id }) {
     const [count, setCount] = useState(

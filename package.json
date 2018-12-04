@@ -1,9 +1,9 @@
 {
-  "name": "react-hooked-state",
+  "name": "reinspect",
   "version": "0.2.0",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
-  "repository": "git@github.com:troch/react-hooked-state.git",
+  "repository": "git@github.com:troch/reinspect.git",
   "author": "Thomas Roch <thomas.c.roch@gmail.com>",
   "license": "MIT",
   "scripts": {

@@ -1,11 +1,11 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { StateInspector } from "./react-hooked-state"
+import { StateInspector } from "./reinspect"
 import { CounterWithUseReducer, CounterWithUseState } from "./Counter";
 
 function App() {
     return (
-        <StateInspector>
+        <StateInspector name="Example">
             <Counters />
         </StateInspector>
     )
