@@ -19,9 +19,10 @@ Why not both? That's exactly what this package offers: connecting `useState` and
 You need [redux devtools](https://github.com/zalmoxisus/redux-devtools-extension) installed. This package provides:
 
 -   `StateInspector`: a provider which will be used by `useState` and `useReducer` to connect them to a store and redux dev tools.
-    - It accepts optionally a `name` (name of the store in dev tools) and `initialState` (if you want to start with a given state)
-    - You can have more than one `StateInspector` in your application, hooks will report to the nearest one
-    - Without a `StateInspector`, `useState` and `useReducer` behave normally
+
+    -   It accepts optionally a `name` (name of the store in dev tools) and `initialState` (if you want to start with a given state)
+    -   You can have more than one `StateInspector` in your application, hooks will report to the nearest one
+    -   Without a `StateInspector`, `useState` and `useReducer` behave normally
 
     ```js
     import React from "react"
@@ -39,7 +40,7 @@ You need [redux devtools](https://github.com/zalmoxisus/redux-devtools-extension
     export default AppWrapper
     ```
 
--   `useState(initialState, id)`: like [useState](https://reactjs.org/docs/hooks-reference.html#usestate) but with a 2nd argument `id` (a unique ID to identify it in dev tools)
+-   `useState(initialState, id)`: like [useState](https://reactjs.org/docs/hooks-reference.html#usestate) but with a 2nd argument `id` (a unique ID to identify it in dev tools). If no `id` is supplied, the hook won't be connected to dev tools.
 
     ```js
     import React from "react"
@@ -57,4 +58,4 @@ You need [redux devtools](https://github.com/zalmoxisus/redux-devtools-extension
     }
     ```
 
--   `useReducer(reducer, initialState, id)`: like [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) but with a 3rd argument `id` (a unique ID to identify it in dev tools)
+-   `useReducer(reducer, initialState, id)`: like [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) but with a 3rd argument `id` (a unique ID to identify it in dev tools). If no `id` is supplied, the hook won't be connected to dev tools.

@@ -132,9 +132,9 @@ function useHookedReducer(reducer, initialState, store, reducerId) {
     return [localState, dispatch];
 }
 function useReducer$1(reducer, initialState, id) {
-    var store = useMemo(function () { return useContext(StateInspectorContext); }, []);
-    return store
-        ? useHookedReducer(reducer, initialState, store, id)
+    var _a = useMemo(function () { return [useContext(StateInspectorContext), id]; }, []), store = _a[0], reducerId = _a[1];
+    return store || !reducerId
+        ? useHookedReducer(reducer, initialState, store, reducerId)
         : useReducer(reducer, initialState);
 }
 
@@ -142,14 +142,14 @@ function stateReducer(state, action) {
     return typeof action === "function" ? action(state) : action;
 }
 var useState$1 = function (initialState, id) {
-    var store = useMemo(function () { return useContext(StateInspectorContext); }, []);
-    if (!store) {
+    var _a = useMemo(function () { return [useContext(StateInspectorContext), id]; }, []), store = _a[0], reducerId = _a[1];
+    if (!store || !reducerId) {
         return useState(initialState);
     }
     var finalInitialState = useMemo(function () {
         return typeof initialState === "function" ? initialState() : initialState;
     }, []);
-    return useHookedReducer(stateReducer, finalInitialState, store, id);
+    return useHookedReducer(stateReducer, finalInitialState, store, reducerId);
 };
 
 export { StateInspector, useReducer$1 as useReducer, useState$1 as useState };

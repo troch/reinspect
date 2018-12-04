@@ -9,12 +9,12 @@ function stateReducer<S>(state: S, action: StateAction<S>): S {
 }
 
 export const useState = <S>(initialState: () => S | S, id: string | number) => {
-    const store = useMemo<EnhancedStore>(
-        () => useContext(StateInspectorContext),
+    const [store, reducerId] = useMemo<[EnhancedStore, string | number]>(
+        () => [useContext(StateInspectorContext), id],
         []
     )
 
-    if (!store) {
+    if (!store || !reducerId) {
         return useReactState<S>(initialState)
     }
 
@@ -24,5 +24,10 @@ export const useState = <S>(initialState: () => S | S, id: string | number) => {
         []
     )
 
-    return useHookedReducer<S, any>(stateReducer, finalInitialState, store, id)
+    return useHookedReducer<S, any>(
+        stateReducer,
+        finalInitialState,
+        store,
+        reducerId
+    )
 }
