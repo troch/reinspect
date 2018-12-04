@@ -1,8 +1,8 @@
-const typescript = require('rollup-plugin-typescript2')
+const typescript = require("rollup-plugin-typescript2")
 
 const formats = {
-    es: 'index.es.js',
-    cjs: 'index.js'
+    es: "index.es.js",
+    cjs: "index.js"
 }
 
 const makeConfig = format => ({
@@ -14,15 +14,12 @@ const makeConfig = format => ({
             clean: true
         })
     ],
-    external: ['react','redux'],
+    external: ["react", "redux"],
     output: {
-        name: 'refract',
+        name: "refract",
         format,
         file: `./dist/${formats[format]}`
     }
 })
 
-module.exports = [
-    makeConfig('cjs'),
-    makeConfig('es')
-]
+module.exports = [makeConfig("cjs"), makeConfig("es")]

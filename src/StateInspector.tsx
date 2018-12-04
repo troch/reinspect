@@ -1,23 +1,12 @@
 import React, { useMemo } from "react"
-import { createStore, Reducer, Action, Store } from "redux"
+import { createStore, Reducer, Action } from "redux"
+import { EnhancedStore, StateInspectorContext } from "./context"
 
 declare global {
     interface Window {
         __REDUX_DEVTOOLS_EXTENSION__?: any
     }
 }
-
-type UnsubscribeFn = () => void
-
-export type EnhancedStore = Store & {
-    registerHookedReducer: <S, A extends Action = Action<any>>(
-        reducer: Reducer<S, A>,
-        initialState: S,
-        reducerId: string
-    ) => UnsubscribeFn
-}
-
-export const StateInspectorContext = React.createContext<EnhancedStore>(null)
 
 interface StateInspectorProps {
     name?: string
@@ -104,6 +93,8 @@ export const StateInspector: React.SFC<StateInspectorProps> = ({
                 })
             }
         }
+
+        return store
     }, [])
 
     return (

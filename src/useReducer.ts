@@ -8,16 +8,16 @@ import {
     useContext
 } from "react"
 import { Action } from "redux"
-import { StateInspectorContext, EnhancedStore } from "./StateInspector"
+import { StateInspectorContext, EnhancedStore } from "./context"
 
 export function useHookedReducer<S, A extends Action<any>>(
     reducer: Reducer<S, A>,
     initialState: S,
     store: EnhancedStore,
-    reducerId: string
+    reducerId: string | number
 ): [S, Dispatch<A>] {
     const initialReducerState = useMemo(() => {
-        const initialStateInStore = store.getState().hookedState[reducerId]
+        const initialStateInStore = store.getState()[reducerId]
         return initialStateInStore === undefined
             ? initialState
             : initialStateInStore
@@ -45,16 +45,16 @@ export function useHookedReducer<S, A extends Action<any>>(
             reducerId
         )
 
-        let lastHookedState = localState
+        let lastReducerState = localState
         const unsubscribe = store.subscribe(() => {
             const storeState: any = store.getState()
-            const hookedState = storeState.hookedState[reducerId]
+            const reducerState = storeState[reducerId]
 
-            if (lastHookedState !== hookedState) {
-                setState(hookedState)
+            if (lastReducerState !== reducerState) {
+                setState(reducerState)
             }
 
-            lastHookedState = hookedState
+            lastReducerState = reducerState
         })
 
         return () => {
@@ -69,7 +69,7 @@ export function useHookedReducer<S, A extends Action<any>>(
 export function useReducer<S, A extends Action<any> = Action<any>>(
     reducer: Reducer<S, A>,
     initialState: S,
-    containerId: string
+    id: string | number
 ): [S, Dispatch<A>] {
     const store = useMemo<EnhancedStore>(
         () => useContext(StateInspectorContext),
@@ -77,6 +77,6 @@ export function useReducer<S, A extends Action<any> = Action<any>>(
     )
 
     return store
-        ? useHookedReducer(reducer, initialState, store, containerId)
+        ? useHookedReducer(reducer, initialState, store, id)
         : useReactReducer<S, A>(reducer, initialState)
 }
