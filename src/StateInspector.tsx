@@ -68,7 +68,7 @@ export const StateInspector: React.SFC<StateInspectorProps> = ({
             initialState,
             window.__REDUX_DEVTOOLS_EXTENSION__({
                 name: name || "React state",
-                actionsBlacklist: /.+\/(_init|_teardown)$/
+                actionsBlacklist: ["/_init", "/_teardown"]
             })
         )
 
