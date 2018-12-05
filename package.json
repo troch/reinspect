@@ -1,6 +1,6 @@
 {
   "name": "reinspect",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Use redux devtools to inspect useState and useReducer hooks",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
