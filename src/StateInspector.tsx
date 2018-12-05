@@ -37,23 +37,23 @@ export const StateInspector: React.SFC<StateInspectorProps> = ({
         > = {}
 
         const storeReducer = (state, action) => {
-            const isInitAction = /\/init$/.test(action.type)
-            const isTeardownAction = /\/teardown$/.test(action.type)
+            const actionReducerId = action.type.split("/")[0]
+            const isInitAction = /\/_init$/.test(action.type)
+            const isTeardownAction = /\/_teardown$/.test(action.type)
 
             const currentState = isTeardownAction
-                ? omit(state, action.payload.reducerId)
+                ? omit(state, actionReducerId)
                 : { ...state }
 
             return Object.keys(registeredReducers).reduce((acc, reducerId) => {
                 const reducer = registeredReducers[reducerId]
                 const reducerState = state[reducerId]
-                const reducerAction = action.payload.action
-                const isForCurrentReducer =
-                    action.payload && action.payload.reducerId === reducerId
+                const reducerAction = action.payload
+                const isForCurrentReducer = actionReducerId === reducerId
 
                 if (isForCurrentReducer) {
                     acc[reducerId] = isInitAction
-                        ? action.payload.initialState
+                        ? action.payload
                         : reducer(reducerState, reducerAction)
                 } else {
                     acc[reducerId] = reducerState
@@ -75,21 +75,15 @@ export const StateInspector: React.SFC<StateInspectorProps> = ({
             registeredReducers[reducerId] = reducer
 
             store.dispatch({
-                type: `${reducerId}/init`,
-                payload: {
-                    reducerId,
-                    initialState
-                }
+                type: `${reducerId}/_init`,
+                payload: initialState
             })
 
             return () => {
                 delete registeredReducers[reducerId]
 
                 store.dispatch({
-                    type: `${reducerId}/teardown`,
-                    payload: {
-                        reducerId
-                    }
+                    type: `${reducerId}/_teardown`
                 })
             }
         }
