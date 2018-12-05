@@ -4,6 +4,7 @@
   "description": "Use redux devtools to inspect useState and useReducer hooks",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
+  "typings": "types/index.d.ts",
   "repository": "git@github.com:troch/reinspect.git",
   "author": "Thomas Roch <thomas.c.roch@gmail.com>",
   "license": "MIT",

@@ -1,13 +1,13 @@
 {
     "compilerOptions": {
-      "allowJs": true,
       "target": "es5",
       "allowSyntheticDefaultImports": true,
       "esModuleInterop": true,
       "jsx": "react",
-      "lib": ["es2015", "dom"]
+      "lib": ["es2015", "dom"],
+      "declaration": true,
+      "declarationDir": "types"
     },
     "exclude": ["node_modules"],
     "include": ["src"]
   }
-  
