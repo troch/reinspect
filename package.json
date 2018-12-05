@@ -1,6 +1,7 @@
 {
   "name": "reinspect",
-  "version": "0.2.0",
+  "version": "0.3.0",
+  "description": "Use redux devtools to inspect useState and useReducer hooks",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "repository": "git@github.com:troch/reinspect.git",
@@ -29,7 +30,7 @@
     "react": "~16.7.0-alpha.2",
     "react-dom": "~16.7.0-alpha.2",
     "react-test-renderer": "~16.6.3",
-    "redux": "~4.0.1",
+    "redux": "^4.0.1",
     "rollup": "~0.67.3",
     "rollup-plugin-typescript2": "~0.18.0",
     "ts-jest": "~23.10.5",
