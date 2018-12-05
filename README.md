@@ -6,6 +6,8 @@ Connect React state hooks (`useState` and `useReducer`) to redux dev tools.
 
 [See it live](https://7ypv9qw6j0.codesandbox.io/)
 
+![useState with Redux dev tools](https://user-images.githubusercontent.com/1777517/49508706-4b223900-f87b-11e8-9c64-534e3dc51047.gif)
+
 ## Why?
 
 Hooks are great, they are a joy to use to create state in components. On the other hand, with something global and centralised like Redux, we have [great dev tools](https://github.com/zalmoxisus/redux-devtools-extension).
