@@ -7967,10 +7967,10 @@ regjsparser@^0.3.0:
   dependencies:
     jsesc "~0.5.0"
 
-reinspect@~0.4.1:
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/reinspect/-/reinspect-0.4.1.tgz#1fbd62117f57aa90c258da3b4cfabca6fbeacb5f"
-  integrity sha512-n7SmqRsKkM+yKJ+ejt/d8It3sIw45543D0Bjt/XfXji4ChUKgYtQyoivuDrOylPm9F4US/+RIZ0L9sa0a9YHpA==
+reinspect@~0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/reinspect/-/reinspect-0.4.2.tgz#451f5c1fa1b0247e759b698f0ba12063749e9ee9"
+  integrity sha512-7UDOT2nVnPoz+lUq2ryuuTGG26DbaQy2es0x/w2BqrbzElmwROmO+JcDbJvAq/xSeYB26vvXM+v79YCWx7bGdg==
   dependencies:
     redux "^4.0.0"
 
