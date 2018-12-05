@@ -21,7 +21,7 @@ const omit = (obj, keyToRemove) =>
             return acc
         }, {})
 
-export const StateInspector: React.SFC<StateInspectorProps> = ({
+export const StateInspector: React.FC<StateInspectorProps> = ({
     name,
     initialState = {},
     children
