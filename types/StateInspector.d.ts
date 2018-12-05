@@ -8,5 +8,5 @@ interface StateInspectorProps {
     name?: string;
     initialState?: any;
 }
-export declare const StateInspector: React.SFC<StateInspectorProps>;
+export declare const StateInspector: React.FC<StateInspectorProps>;
 export {};
