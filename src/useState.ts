@@ -9,8 +9,9 @@ function stateReducer<S>(state: S, action: StateAction<S>): S {
 }
 
 export const useState = <S>(initialState: () => S | S, id: string | number) => {
+    const inspectorStore = useContext(StateInspectorContext)
     const [store, reducerId] = useMemo<[EnhancedStore, string | number]>(
-        () => [useContext(StateInspectorContext), id],
+        () => [inspectorStore, id],
         []
     )
 

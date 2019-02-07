@@ -66,14 +66,16 @@ export function useHookedReducer<S, A extends Action<any>>(
 export function useReducer<S, A extends Action<any> = Action<any>>(
     reducer: Reducer<S, A>,
     initialState: S,
+    init: (state: S) => S = state => state,
     id: string | number
 ): [S, Dispatch<A>] {
+    const inspectorStore = useContext(StateInspectorContext)
     const [store, reducerId] = useMemo<[EnhancedStore, string | number]>(
-        () => [useContext(StateInspectorContext), id],
+        () => [inspectorStore, id],
         []
     )
 
     return store || !reducerId
         ? useHookedReducer(reducer, initialState, store, reducerId)
-        : useReactReducer<S, A>(reducer, initialState)
+        : useReactReducer<Reducer<S, A>, S>(reducer, initialState, init)
 }
