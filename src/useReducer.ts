@@ -5,7 +5,9 @@ import {
     Dispatch,
     useState,
     useEffect,
-    useContext
+    useContext,
+    ReducerState,
+    ReducerAction
 } from "react"
 import { Action } from "redux"
 import { StateInspectorContext, EnhancedStore } from "./context"
@@ -63,19 +65,19 @@ export function useHookedReducer<S, A extends Action<any>>(
     return [localState, dispatch]
 }
 
-export function useReducer<S, A extends Action<any> = Action<any>>(
-    reducer: Reducer<S, A>,
-    initialState: S,
-    init: (state: S) => S = state => state,
+export function useReducer<R extends Reducer<any, any>, I>(
+    reducer: R,
+    initialState: I,
+    initializer: (arg: I) => ReducerState<R>,
     id: string | number
-): [S, Dispatch<A>] {
-    const inspectorStore = useContext(StateInspectorContext)
-    const [store, reducerId] = useMemo<[EnhancedStore, string | number]>(
-        () => [inspectorStore, id],
-        []
-    )
+): [ReducerState<R>, Dispatch<ReducerAction<R>>] {
+    const store = useContext(StateInspectorContext)
 
-    return store || !reducerId
-        ? useHookedReducer(reducer, initialState, store, reducerId)
-        : useReactReducer<Reducer<S, A>, S>(reducer, initialState, init)
+    const initializedState = initializer
+        ? initializer(initialState)
+        : initialState
+
+    return store || !id
+        ? useHookedReducer(reducer, initializedState, store, id)
+        : useReactReducer(reducer, initialState, initializer)
 }
