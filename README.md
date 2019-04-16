@@ -62,4 +62,4 @@ You need [redux devtools](https://github.com/zalmoxisus/redux-devtools-extension
     }
     ```
 
--   `useReducer(reducer, initialState, id)`: like [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) but with a 3rd argument `id` (a unique ID to identify it in dev tools). If no `id` is supplied, the hook won't be connected to dev tools.
+-   `useReducer(reducer, initialState, init, id)`: like [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) but with a 4th argument `id` (a unique ID to identify it in dev tools). If no `id` is supplied, the hook won't be connected to dev tools. You can use identity function (`state => state`) as 3rd parameter to mock lazy initialization.

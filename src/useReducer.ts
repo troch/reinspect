@@ -5,7 +5,9 @@ import {
     Dispatch,
     useState,
     useEffect,
-    useContext
+    useContext,
+    ReducerState,
+    ReducerAction
 } from "react"
 import { Action } from "redux"
 import { StateInspectorContext, EnhancedStore } from "./context"
@@ -63,17 +65,31 @@ export function useHookedReducer<S, A extends Action<any>>(
     return [localState, dispatch]
 }
 
-export function useReducer<S, A extends Action<any> = Action<any>>(
-    reducer: Reducer<S, A>,
-    initialState: S,
-    id: string | number
-): [S, Dispatch<A>] {
-    const [store, reducerId] = useMemo<[EnhancedStore, string | number]>(
-        () => [useContext(StateInspectorContext), id],
-        []
-    )
+export function useReducer<R extends Reducer<any, any>>(
+    reducer: R,
+    initialState: ReducerState<R>,
+    initializer?: undefined,
+    id?: string | number
+): [ReducerState<R>, Dispatch<ReducerAction<R>>]
+export function useReducer<R extends Reducer<any, any>, I>(
+    reducer: R,
+    initialState: I,
+    initializer: (arg: I) => ReducerState<R>,
+    id?: string | number
+): [ReducerState<R>, Dispatch<ReducerAction<R>>]
+export function useReducer<R extends Reducer<any, any>, I>(
+    reducer: R,
+    initialState: I & ReducerState<R>,
+    initializer: (arg: I & ReducerState<R>) => ReducerState<R>,
+    id?: string | number
+): [ReducerState<R>, Dispatch<ReducerAction<R>>] {
+    const store = useContext(StateInspectorContext)
 
-    return store || !reducerId
-        ? useHookedReducer(reducer, initialState, store, reducerId)
-        : useReactReducer<S, A>(reducer, initialState)
+    const initializedState = initializer
+        ? initializer(initialState)
+        : initialState
+
+    return store || !id
+        ? useHookedReducer(reducer, initializedState, store, id)
+        : useReactReducer(reducer, initialState, initializer)
 }
