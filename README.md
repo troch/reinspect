@@ -44,7 +44,7 @@ You need [redux devtools](https://github.com/zalmoxisus/redux-devtools-extension
     export default AppWrapper
     ```
 
--   `useState(initialState, id)`: like [useState](https://reactjs.org/docs/hooks-reference.html#usestate) but with a 2nd argument `id` (a unique ID to identify it in dev tools). If no `id` is supplied, the hook won't be connected to dev tools.
+-   `useState(initialState, id?)`: like [useState](https://reactjs.org/docs/hooks-reference.html#usestate) but with a 2nd argument `id` (a unique ID to identify it in dev tools). If no `id` is supplied, the hook won't be connected to dev tools.
 
     ```js
     import React from "react"
@@ -62,4 +62,4 @@ You need [redux devtools](https://github.com/zalmoxisus/redux-devtools-extension
     }
     ```
 
--   `useReducer(reducer, initialState, init, id)`: like [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) but with a 4th argument `id` (a unique ID to identify it in dev tools). If no `id` is supplied, the hook won't be connected to dev tools. You can use identity function (`state => state`) as 3rd parameter to mock lazy initialization.
+-   `useReducer(reducer, initialState, initializer?, id?)`: like [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) but with a 4th argument `id` (a unique ID to identify it in dev tools). If no `id` is supplied, the hook won't be connected to dev tools. You can use identity function (`state => state`) as 3rd parameter to mock lazy initialization.

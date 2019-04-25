@@ -68,7 +68,6 @@ export function useHookedReducer<S, A extends Action<any>>(
 export function useReducer<R extends Reducer<any, any>>(
     reducer: R,
     initialState: ReducerState<R>,
-    initializer?: undefined,
     id?: string | number
 ): [ReducerState<R>, Dispatch<ReducerAction<R>>]
 export function useReducer<R extends Reducer<any, any>, I>(
@@ -82,7 +81,24 @@ export function useReducer<R extends Reducer<any, any>, I>(
     initialState: I & ReducerState<R>,
     initializer: (arg: I & ReducerState<R>) => ReducerState<R>,
     id?: string | number
-): [ReducerState<R>, Dispatch<ReducerAction<R>>] {
+): [ReducerState<R>, Dispatch<ReducerAction<R>>]
+export function useReducer<R extends Reducer<any, any>, I>(
+    reducer,
+    initialState,
+    ...args
+) {
+    let id: string | number
+    let initializer: (arg: I | I & ReducerState<R>) => ReducerState<R>
+
+    if (args.length === 2) {
+        initializer = args[0]
+        id = args[1]
+    } else if (typeof args[0] === "string" || typeof args[0] === "number") {
+        id = args[0]
+    } else {
+        initializer = args[0]
+    }
+
     const store = useContext(StateInspectorContext)
 
     const initializedState = initializer

@@ -152,7 +152,6 @@ describe("reinspect", () => {
             const [state3, dispatch3] = useReinspectReducer(
                 myReducer,
                 { count: 2 },
-                undefined,
                 "NAME"
             )
 
