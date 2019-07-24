@@ -27,7 +27,10 @@ export const StateInspector: React.FC<StateInspectorProps> = ({
     children
 }) => {
     const store = useMemo<EnhancedStore>(() => {
-        if (typeof window === "undefined" || !window.__REDUX_DEVTOOLS_EXTENSION__) {
+        if (
+            typeof window === "undefined" ||
+            !window.__REDUX_DEVTOOLS_EXTENSION__
+        ) {
             return null
         }
 
