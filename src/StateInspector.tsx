@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import React, { useMemo, useEffect } from "react"
 import { createStore, Reducer, Action } from "redux"
 import { EnhancedStore, StateInspectorContext } from "./context"
 
@@ -93,6 +93,11 @@ export const StateInspector: React.FC<StateInspectorProps> = ({
         }
 
         return store
+    }, [])
+
+    useEffect(() => {
+        store.dispatch({ type: "REINSPECT/@@INIT", payload: {} })
+        return () => {}
     }, [])
 
     return (
