@@ -97,7 +97,6 @@ export const StateInspector: React.FC<StateInspectorProps> = ({
 
     useEffect(() => {
         store && store.dispatch({ type: "REINSPECT/@@INIT", payload: {} })
-        return () => {}
     }, [])
 
     return (
