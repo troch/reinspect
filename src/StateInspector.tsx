@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import React, { useMemo, useEffect } from "react"
 import { createStore, Reducer, Action } from "redux"
 import { EnhancedStore, StateInspectorContext } from "./context"
 
@@ -27,7 +27,10 @@ export const StateInspector: React.FC<StateInspectorProps> = ({
     children
 }) => {
     const store = useMemo<EnhancedStore>(() => {
-        if (typeof window === "undefined" || !window.__REDUX_DEVTOOLS_EXTENSION__) {
+        if (
+            typeof window === "undefined" ||
+            !window.__REDUX_DEVTOOLS_EXTENSION__
+        ) {
             return null
         }
 
@@ -90,6 +93,10 @@ export const StateInspector: React.FC<StateInspectorProps> = ({
         }
 
         return store
+    }, [])
+
+    useEffect(() => {
+        store && store.dispatch({ type: "REINSPECT/@@INIT", payload: {} })
     }, [])
 
     return (
