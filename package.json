@@ -1,8 +1,12 @@
 {
     "name": "reinspect",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Use redux devtools to inspect useState and useReducer hooks",
     "main": "dist/index.js",
+    "files": [
+        "dist",
+        "types"
+    ],
     "module": "dist/index.es.js",
     "typings": "types/index.d.ts",
     "repository": "git@github.com:troch/reinspect.git",
