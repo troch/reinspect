@@ -29,7 +29,9 @@ export function useHookedReducer<S, A extends Action<any>>(
 
     const dispatch = useMemo<Dispatch<A>>(() => {
         const dispatch = (action: A) => {
-            const actionWithType = action && typeof action.type !== "undefined"
+            const actionWithType = !!(
+                action && typeof action.type !== "undefined"
+            )
 
             return store.dispatch({
                 type: actionWithType
