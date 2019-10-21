@@ -103,7 +103,7 @@ function useHookedReducer(reducer, initialState, store, reducerId) {
     var _a = useState$1(initialReducerState), localState = _a[0], setState = _a[1];
     var dispatch = useMemo(function () {
         var dispatch = function (action) {
-            var actionWithType = action && typeof action.type !== "undefined";
+            var actionWithType = !!(action && typeof action.type !== "undefined");
             return store.dispatch({
                 type: actionWithType
                     ? reducerId + "/" + action.type
