@@ -28,11 +28,16 @@ export function useHookedReducer<S, A extends Action<any>>(
     const [localState, setState] = useState<S>(initialReducerState)
 
     const dispatch = useMemo<Dispatch<A>>(() => {
-        const dispatch = (action: A) =>
-            store.dispatch({
-                type: action.type ? `${reducerId}/${action.type}` : reducerId,
+        const dispatch = (action: A) => {
+            const actionWithType = action && typeof action.type !== "undefined"
+
+            return store.dispatch({
+                type: actionWithType
+                    ? `${reducerId}/${action.type}`
+                    : reducerId,
                 payload: action
             })
+        }
 
         return dispatch
     }, [])
