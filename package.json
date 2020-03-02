@@ -1,69 +1,58 @@
 {
-    "name": "reinspect",
-    "version": "1.0.2",
-    "description": "Use redux devtools to inspect useState and useReducer hooks",
-    "main": "dist/index.js",
-    "files": [
-        "dist",
-        "types"
+  "name": "reinspect",
+  "version": "1.0.2",
+  "description": "Use redux devtools to inspect useState and useReducer hooks",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/reinspect.esm.js",
+  "typings": "dist/index.d.ts",
+  "repository": "git@github.com:troch/reinspect.git",
+  "author": "Thomas Roch <thomas.c.roch@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test",
+    "lint": "tsdx lint src test"
+  },
+  "devDependencies": {
+    "tsdx": "0.12.3",
+    "@types/enzyme": "~3.9.1",
+    "@types/enzyme-adapter-react-16": "~1.0.5",
+    "@types/jest": "~24.0.11",
+    "@types/react": "~16.8.3",
+    "conventional-changelog-cli": "~2.0.12",
+    "enzyme": "~3.9.0",
+    "enzyme-adapter-react-16": "~1.12.1",
+    "husky": "^4.2.3",
+    "react": "~16.8.6",
+    "react-dom": "~16.8.6",
+    "react-test-renderer": "~16.8.2",
+    "typescript": "~3.8.3"
+  },
+  "dependencies": {
+    "redux": "^4.0.5"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.1"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "jsdom",
+    "setupFiles": [
+      "<rootDir>/tests/test.setup.js"
     ],
-    "module": "dist/index.es.js",
-    "typings": "types/index.d.ts",
-    "repository": "git@github.com:troch/reinspect.git",
-    "author": "Thomas Roch <thomas.c.roch@gmail.com>",
-    "license": "MIT",
-    "scripts": {
-        "build": "rollup -c rollup.config.js",
-        "test": "jest"
-    },
-    "lint-staged": {
-        "src/**/*.{js,ts,tsx}": [
-            "prettier --write",
-            "git add"
-        ]
-    },
-    "devDependencies": {
-        "@types/enzyme": "~3.9.1",
-        "@types/enzyme-adapter-react-16": "~1.0.5",
-        "@types/jest": "~24.0.11",
-        "@types/react": "~16.8.3",
-        "conventional-changelog-cli": "~2.0.12",
-        "enzyme": "~3.9.0",
-        "enzyme-adapter-react-16": "~1.12.1",
-        "husky": "~2.1.0",
-        "jest": "~24.7.1",
-        "lint-staged": "~8.1.5",
-        "prettier": "~1.17.0",
-        "react": "~16.8.6",
-        "react-dom": "~16.8.6",
-        "react-test-renderer": "~16.8.2",
-        "redux": "~4.0.1",
-        "rollup": "~1.10.1",
-        "rollup-plugin-typescript2": "~0.21.0",
-        "ts-jest": "~24.0.2",
-        "typescript": "~3.3.3"
-    },
-    "dependencies": {
-        "redux": "^4.0.1"
-    },
-    "peerDependencies": {
-        "react": ">=16.8.1"
-    },
-    "jest": {
-        "preset": "ts-jest",
-        "testEnvironment": "jsdom",
-        "setupFiles": [
-            "<rootDir>/tests/test.setup.js"
-        ],
-        "globals": {
-            "ts-jest": {
-                "tsConfig": "<rootDir>/tests/tsconfig.json"
-            }
-        }
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "<rootDir>/tests/tsconfig.json"
+      }
     }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
 }
