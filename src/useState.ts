@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useHookedReducer } from "./useReducer"
-import { useMemo, useContext, useState as useReactState, useRef } from "react"
+import { useMemo, useContext, useState as useReactState } from "react"
 import { EnhancedStore, StateInspectorContext } from "./context"
 
 type StateAction<S> = S | ((s: S) => S)

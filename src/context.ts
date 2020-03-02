@@ -1,4 +1,4 @@
-import React, { Reducer, ReducerAction } from "react"
+import React, { Reducer } from "react"
 import { Store } from "redux"
 
 type UnsubscribeFn = () => void

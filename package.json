@@ -15,7 +15,7 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test",
-    "lint": "tsdx lint src test"
+    "lint": "tsdx lint src tests"
   },
   "devDependencies": {
     "tsdx": "0.12.3",
@@ -52,7 +52,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "tsdx lint src tests"
     }
   }
 }
