@@ -23,7 +23,7 @@ export const Provider = <T extends {}>({
   const dispatch = useCallback(debounce(setStore, debounceTime), [setStore])
 
   useEffect(() => {
-    debounce ? dispatch(store) : setStore(store)
+    debounceTime ? dispatch(store) : setStore(store)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [store])
 
