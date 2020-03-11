@@ -20,12 +20,12 @@ export const Provider = <T extends {}>({
   const [_, setStore] = useState<T>(defaultStore, "Counter")
 
   // @ts-ignore
-  const dispatch = useCallback(debounce(setStore, debounceTime), [setStore])
+  const dispatch = useCallback(debounce(setStore, debounceTime), [debounceTime])
 
   useEffect(() => {
     debounceTime ? dispatch(store) : setStore(store)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [store])
+  }, [debounceTime, store])
 
   return <context.Provider value={store}>{children}</context.Provider>
 }
