@@ -100,7 +100,7 @@ export function useReducer<R extends Reducer<any, any>, I>(
   ...args: any[]
 ) {
   let id: string | number | undefined
-  let initializer: (arg: I | (I & ReducerState<R>)) => ReducerState<R> = args[0]
+  let initializer: (arg: I | (I & ReducerState<R>)) => ReducerState<R>
 
   if (args.length === 2) {
     initializer = args[0]
