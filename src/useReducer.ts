@@ -2,7 +2,6 @@
 import {
   useReducer as useReactReducer,
   Reducer,
-  useMemo,
   Dispatch,
   useState,
   useEffect,
@@ -18,17 +17,17 @@ export function useHookedReducer<S, A>(
   store: EnhancedStore,
   reducerId: string | number
 ): [S, Dispatch<A>] {
-  const initialReducerState = useMemo(() => {
+  const [initialReducerState] = useState(() => {
     const initialStateInStore = store.getState()[reducerId]
     return initialStateInStore === undefined
       ? initialState
       : initialStateInStore
-  }, [])
+  })
 
   const [localState, setState] = useState<S>(initialReducerState)
 
-  const dispatch = useMemo<Dispatch<A>>(() => {
-    const dispatch = (action: any) => {
+  const [dispatch] = useState<Dispatch<A>>(() => {
+    return (action: any) => {
       if (
         action &&
         typeof action === "object" &&
@@ -45,17 +44,14 @@ export function useHookedReducer<S, A>(
         })
       }
     }
+  })
 
-    return dispatch
-  }, [])
-
-  useEffect(() => {
+  const [cleanup] = useState(() => {
     const teardown = store.registerHookedReducer(
       reducer,
       initialReducerState,
       reducerId
     )
-
     let lastReducerState = localState
     const unsubscribe = store.subscribe(() => {
       const storeState: any = store.getState()
@@ -67,12 +63,15 @@ export function useHookedReducer<S, A>(
 
       lastReducerState = reducerState
     })
-
     return () => {
-      unsubscribe()
       teardown()
+      unsubscribe()
     }
-  }, [])
+  })
+
+  useEffect(() => {
+    return cleanup
+  }, [cleanup])
 
   return [localState, dispatch]
 }
@@ -100,7 +99,9 @@ export function useReducer<R extends Reducer<any, any>, I>(
   ...args: any[]
 ) {
   let id: string | number | undefined
-  let initializer: (arg: I | (I & ReducerState<R>)) => ReducerState<R> = args[0]
+  let initializer:
+    | ((arg: I | (I & ReducerState<R>)) => ReducerState<R>)
+    | undefined
 
   if (args.length === 2) {
     initializer = args[0]
@@ -120,5 +121,7 @@ export function useReducer<R extends Reducer<any, any>, I>(
 
   return store && id
     ? useHookedReducer(reducer, initializedState, store, id)
-    : useReactReducer(reducer, initialState, initializer)
+    : initializer
+    ? useReactReducer(reducer, initialState, initializer)
+    : useReactReducer(reducer, initialState)
 }
