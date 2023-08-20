@@ -11,6 +11,7 @@ declare global {
 interface StateInspectorProps {
   name?: string
   initialState?: any
+  children?: React.ReactNode
 }
 
 interface StoreReducerAction {
